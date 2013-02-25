@@ -309,6 +309,9 @@
 						break;
 				}
 				
+				// Set image
+				$this->set("postImage", $model->getImage("main", "thumb"));
+				
 				// Set category checkboxes
 				$existingCategories = $model->getCategories();
 				if ($existingCategories) {

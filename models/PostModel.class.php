@@ -77,7 +77,7 @@
 			"thumb"		=>	array(
 				"width"		=>	120,
 				"height"	=>	120,
-				"notFoundPath"	=>	"/content/post-notfound-thumb.png",
+				"notFoundPath"	=>	"/plugins/compost/css/images/post-not-found.png",
 				"format"	=>	"png",
 			),
 		);

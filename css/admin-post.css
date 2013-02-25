@@ -8,15 +8,30 @@ For:		Code Dealers
 
 */
 
+iframe {
+	width: 918px;
+	height: 517px;
+	}
+
+	p img	{
+		margin: 20px 0;
+		border: 1px solid #CCCCCC;
+		}
+
 	.quotetype textarea {
 		font-size: 38px;
 		margin-bottom: 40px;
 		height: 200px;
 	}
+	
+	fieldset p {
+		font-size: 0.7em;
+   		margin-bottom: 1em;
+		}
 
 textarea {
 	display: block;
-	width: 600px;
+	width: 900px;
 }
 
 th {
@@ -102,10 +117,16 @@ th {
 			float: right;
 			font-weight: normal;
 		}
+		
+table.drafts {
+	margin-bottom: 80px;
+	border-bottom: 1px solid #D5D5D5;
+	}		
+				
 			
 	.messages {
 		height: 80px;
-	}
+	}	
 
 #delete_action_move_category_container {
 	display: inline;
@@ -115,18 +136,33 @@ th {
 	margin-bottom: 0;
 }
 
+/* ------ Ed toolbar ------ */
+
+#ed_toolbar {
+	margin: 5px 0 0;
+	background-color: #7d807b;
+}
+
 	#ed_toolbar input {
-		font-size: 12px;
-		padding: 0 5px;
-		border: outset 1px #ccc;
-		background-color: #fff;
-		color: inherit;
-	}
+		font-size: 11px;
+		padding: 5px 8px;
+		border-width: 0 1px 0 0;
+		border-style: solid;
+		border-color: #9d9d9d;
+		color: #fff;
+		background: #7d807b;
+		margin: 0;
+		}
 	
 		#ed_toolbar input:hover {
-			border-style: inset;
 			cursor: pointer;
-		}
+			color: #fff;
+			background-color: #595959;
+			border-color: #464c42;
+			-moz-box-shadow: inset 0 1px 2px 1px #464c42;
+			-webkit-box-shadow: inset 0 1px 2px 1px #464c42;
+			box-shadow: inset 0 1px 2px 1px #464c42;
+			}
 	
 	#ed_toolbar #ed_bold {
 		font-weight: bold;
@@ -136,10 +172,84 @@ th {
 		font-style: italic;
 	}
 	
-	#ed_toolbar #ed_link {
-		color: #f00;
-		background-color: inherit;
+/* ----- related items tool ----- */	
+	
+	#related-items li, #related-results li {
+		padding: 4px 0;
+		font-size: 12px;
+		}
+	
+	#related-items ul, #related-results ul {
+		margin-left: 0;
+		overflow: hidden;
+		}	
+	
+#related-items {
+	float: left;
+	clear: none;
+	width: 280px;
+	margin-right: 20px;
 	}
+	
+	#related-items li .remove {
+		color: #7e9f70;
+		background-color: inherit;
+		font-size: 10px;
+		padding-left: 4px;
+		}
+		
+		#related-items li .remove:hover {
+			cursor: pointer;
+			color: #333;
+			background-color: inherit;
+			}
+	
+#related-results {
+	float: right;
+	overflow: hidden;
+	width: 600px;
+	}
+	
+	#related-results div {
+		float: left;
+		clear: none;
+		width: 280px;
+		margin-right: 20px;
+		clear: none;
+		}
+		
+		#related-results div:nth-child(2n+1) {
+			clear: both;
+			}
+	
+#related-results li {
+	color: #729D6D;
+	background-color: inherit;
+	cursor: pointer;
+	padding-right: 35px;
+	position: relative;
+	float: left;
+	clear: both;
+	}
+
+	#related-results li:hover {
+		color: #333;
+		background-color: inherit;
+		}
+		
+		#related-results li:hover:after {
+			display: block;
+			content: "(add)";
+			font-size: 10px;
+			color: #888;
+			background-color: inherit;
+			top: 5px;
+			right: 0;
+			position: absolute;
+			display: block;
+			}	
+		
+/* ---------- */	
 	
 	.subnavigation a.active {
 		color: #607452;
