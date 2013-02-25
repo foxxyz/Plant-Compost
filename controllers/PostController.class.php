@@ -186,7 +186,7 @@
 									
 			// If post token is present, check the date and load the post
 			if ($postToken) {
-				$this->action = "single";
+				
 				$secondsInADay = 24 * 3600;
 				$approxPostTime = mktime(0, 0, 0, $month, $day, $year);
 				
@@ -231,13 +231,15 @@
 					$conditions .= " AND MONTH(date_posted) = '" . $month . "'";
 					$this->set("month", $month);
 					$this->set("monthName", date("F", mktime(0, 0, 0, $month, 1, $year)));
-					$this->setTitle($this->get("monthName"));
+					$this->setTitle($this->getTemplateVars("monthName"));
 				}
 				if ($day) $conditions .= " AND DAY(date_posted) = '" . $day . "'";
 				
 				if ($page == false) $page = 1;
 				
 				$this->set("posts", $this->paginate(Model::getAll("post", $conditions, "date_posted DESC", config("POSTS_PER_PAGE"), $page)));
+				
+				$this->action = "list";
 			}
 			
 			// Set RSS feed
@@ -279,6 +281,7 @@
 
 			// Set javascript for Quicktags
 			$this->setJavascript("quicktags");
+			$this->setJavascriptVar("postWidth", config("POST_WIDTH"));
 
 			if ($action == "add") {
 				$this->form->set("post_date_posted", date("F j, Y, H:i"));

@@ -16,7 +16,7 @@
 	 * @copyright Copyright (c) 2008, Ivo Janssen
 	 * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
 	 * @package plant_compost
-	 * @version 1.0
+	 * @version 1.2
 	 * @uses CONTENT_DIR
 	 * @uses LOCAL_SITE_ROOT
 	 * @uses PLUGIN_DIR
@@ -28,7 +28,7 @@
 		 * created in the main content directory from this variable.
 		 * @var string directory name
 		 */
-		private $pluginContentDir = "posts";
+		private $pluginContentDir = "posts/";
 		
 		/**
 		 * Plugin Activation
@@ -42,10 +42,12 @@
 			
 			// Create directories
 			umask(0);
-			if (!is_dir(config("LOCAL_SITE_ROOT") . config("CONTENT_DIR")) && !mkdir(config("LOCAL_SITE_ROOT") . config("CONTENT_DIR"), 0777)) throw new Exception("Couldn't create content directory at '" . config("LOCAL_SITE_ROOT") . config("CONTENT_DIR") . "'! Check server permissions!");
-			if (!@mkdir(config("LOCAL_SITE_ROOT") . config("CONTENT_DIR") . $this->pluginContentDir . "/", 0777)) throw new Exception("Couldn't create '" . $this->pluginContentDir . "' subdirectory in '/" . config("CONTENT_DIR") . "'! Check server permissions!");
-			if (!@mkdir(config("LOCAL_SITE_ROOT") . config("CONTENT_DIR") . $this->pluginContentDir . "/browser-thumbs/", 0777)) throw new Exception("Couldn't create 'browser-thumbs' subdirectory in '/" . config("CONTENT_DIR") . $this->pluginContentDir . "'! Check server permissions!");
-			if (!@mkdir(config("LOCAL_SITE_ROOT") . config("CONTENT_DIR") . $this->pluginContentDir . "/thumbs/", 0777)) throw new Exception("Couldn't create 'thumbs' subdirectory in '/" . config("CONTENT_DIR") . $this->pluginContentDir . "'! Check server permissions!");
+			$contentDir = config("LOCAL_SITE_ROOT") . config("CONTENT_DIR");
+			$postsDir = $contentDir . $this->pluginContentDir;
+			if (!is_dir($contentDir) && !mkdir($contentDir, 0777)) throw new Exception("Couldn't create content directory at '" . $contentDir . "'! Check server permissions!");
+			if (!@mkdir($postsDir, 0777)) throw new Exception("Couldn't create '" . $this->pluginContentDir . "' subdirectory in '/" . config("CONTENT_DIR") . "'! Check server permissions!");
+			if (!@mkdir($postsDir . "/browser-thumbs/", 0777)) throw new Exception("Couldn't create 'browser-thumbs' subdirectory in '/" . $postsDir . "'! Check server permissions!");
+			if (!@mkdir($postsDir . "/thumbs/", 0777)) throw new Exception("Couldn't create 'thumbs' subdirectory in '/" . $postsDir . "'! Check server permissions!");
 
 			// Create tables
 			Model::createStorage("post");

@@ -17,9 +17,9 @@ $(document).ready(function(){
 	$("#upload_form_enable").uploadify({
 		"uploader"		:	"/plugins/compost/components/uploadify.swf",
 		"script"		:	uploadScript,
-		"scriptData"		:	{"upload_submit": "true", "cookiejar" : document.cookie, "ajax" : "true"},
+		"scriptData"	:	{"upload_submit": "true", "cookiejar" : document.cookie, "ajax" : "true"},
 		"cancelImg"		:	"cancel.png",
-		"buttonText"		:	"Upload New",
+		"buttonText"	:	"Upload New",
 		"buttonImg"		:	"/plugins/compost/css/images/upload-new.png",
 		"cancelImg"		:	"/plugins/compost/css/images/upload-cancel.png",
 		"auto"			:	true,
@@ -27,8 +27,8 @@ $(document).ready(function(){
 		"width"			:	70,
 		"height"		:	20,
 		"queueID"		:	"uploadqueue",
-		"onComplete"		: 	updateItems,
-		"onAllComplete"		:	refreshItems,
+		"onComplete"	: 	updateItems,
+		"onAllComplete"	:	refreshItems,
 		"sizeLimit"		:	maxSize
 	});
 
@@ -48,13 +48,13 @@ $(document).ready(function(){
 	});
 
 	// File selection
-	$(".item").bind("click",selectFile);
+	$(".item").on("click",selectFile);
 	
 	// Start timers
 	setInterval("decreaseTimers()", 1000);
 	
 	// Set type of recipient window
-	if (window.opener.$("#post_image").length) recipientType = "image";
+	if (window.opener.$("#post_contentimage").length) recipientType = "image";
 	else if (window.opener.$("#post_video").length) recipientType = "video";
 	else recipientType = "post";
 
@@ -256,6 +256,7 @@ function insertSelected(inputs) {
 	
 	// Set up request url
 	reqURL = uploadScript + "get/" + selectedFile.find(".name").text() + "." + selectedFile.find(".type").text() + "/";
+	console.log(reqURL);
 
 	// AJAX to get the most current content
 	$.getJSON(reqURL, function(data) {
@@ -263,9 +264,11 @@ function insertSelected(inputs) {
 			if (inputs.method == "selection") insertFile(file);	
 			else insertCode(createCode(file,inputs));
 		});
-		$.each(data.errors, function(i,error) {
-			alert(error["message"]);
-		});
+		if (data.errors) {
+			$.each(data.errors, function(i,error) {
+				alert(error["message"]);
+			});
+		}
 	});
 }
 
@@ -282,8 +285,6 @@ function refreshItems() {
 
 // Select file
 function selectFile(ev) {
-
-	if (ev.detail != 1) return false;
 
 	alreadySelected = $(this).is(".selected");
 	$(".item").removeClass("selected");
@@ -386,7 +387,7 @@ function updateItems(event, queueID, fileObj, response, queueData) {
 				"</li>";
 				
 				var newEntry = $(newEntryCode);
-				newEntry.bind("click", selectFile);
+				newEntry.on("click", selectFile);
 				newEntry.find(".delete").click(function() {
 				
 					return confirm("Are you sure?");

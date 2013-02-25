@@ -465,12 +465,12 @@
 					switch($this->getType()) {
 						case "image":
 						case "video":
-							return "<div class=\"post media\">" . $this->getContent($this->getType(), $absoluteURLs) . "</div><div class=\"post\">" . $this->getContent("text", $absoluteURLs) . "</div>";
+							return $this->getContent($this->getType(), $absoluteURLs) . $this->getContent("text", $absoluteURLs);
 						case "quote":
-							return "<div class=\"post\">" . $this->getContent("quote", $absoluteURLs) . "</div>";
+							return $this->getContent("quote", $absoluteURLs);
 						case "article":
 						default:
-							return "<div class=\"post\">" . $this->getContent("text", $absoluteURLs) . "</div>";
+							return $this->getContent("text", $absoluteURLs);
 					}
 			}
 

@@ -27,10 +27,8 @@
 // ID of the editing textarea
 editFieldID = "#post_content";
 
-// Width of inserted youtube clips (in px)
-defaultClipWidth = "459";
-// Height of inserted youtube clips (in px)
-defaultClipHeight = "370";
+// Default ratio for embedded videos
+defaultClipRatio = .5625;
 
 $(document).ready(function(){
 	
@@ -296,15 +294,20 @@ function edInsertExternalVideo(insertField) {
 	var insertValue = prompt('Paste the video URL!\n\n(Supported sites: Youtube, Vimeo)', 'http://');
 	if (insertValue) {
 		if (insertValue.match(/youtube\.com\//) && insertValue.match(/v=([a-zA-Z0-9-_]+)/)) {
-			var clipID = RegExp.$1;
-			var html = "<span class=\"video flash\"><object type=\"application/x-shockwave-flash\" data=\"http://youtube.com/v/" + clipID + "\" width=\"" + defaultClipWidth + "\" height=\"" + defaultClipHeight + "\" class=\"VideoPlayback\"><param name=\"movie\" value=\"http://youtube.com/v/" + clipID + "\" /><param name=\"quality\" value=\"best\" /><param name=\"wmode\" value=\"transparent\" /></object></span>";
-			edInsertContent(insertField, html);
+			embedURL = "http://youtube.com/embed/" + RegExp.$1 + "/";		
 		}
 		else if (insertValue.match(/vimeo\.com\//) && insertValue.match(/([0-9]+)/)) {
-			var clipID = RegExp.$1;
-			var html = "<span class=\"video flash\"><object type=\"application/x-shockwave-flash\" data=\"http://vimeo.com/moogaloop.swf?clip_id=" + clipID + "\" width=\"" + defaultClipWidth + "\" height=\"" + defaultClipHeight + "\"><param name=\"movie\" value=\"http://vimeo.com/moogaloop.swf?clip_id=" + clipID + "\" /><param name=\"wmode\" value=\"transparent\" /></object></span>";
-			edInsertContent(insertField, html);
+			embedURL = "http://player.vimeo.com/video/" + RegExp.$1;
 		}
-		else alert("That's not a valid URL. We only support Youtube and Vimeo URLs.\n\nExample: http://youtube.com/watch?v=1hxOr3q7nrk");
+		else {
+			alert("That's not a valid URL. We only support Youtube and Vimeo URLs.\n\nExample: http://youtube.com/watch?v=1hxOr3q7nrk");
+			return false;
+		}
+		
+		width = postWidth;
+		height = width * defaultClipRatio;	
+		html = "<iframe class=\"video\" src=\"" + embedURL + "\" width=\"" + width + "\" height=\"" + height + "\" seamless></iframe>";
+		edInsertContent(insertField, html);
+		
 	}
 }

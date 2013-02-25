@@ -8,30 +8,62 @@ For:		Code Dealers
 
 */
 
-#content {
-	width: 500px;
-}
-
-#subnavigation {
+aside {
 	float: right;
-	width: 180px;
-	padding-bottom: 30px;
+	width: 150px;
+	padding: 0 1em 30px;
+	text-align: left;
 }
 
-	#subnavigation fieldset {
-		padding-bottom: 0;
-		padding-top: 0;
+	aside fieldset {
+		padding: 0;
+	}
+	
+	aside form {
+		text-align: left;
+		margin: 0;
+	}
+	
+	aside #archives h3 {
+		margin-bottom: 1em;
+	}
+	
+	aside li {
+		margin: 0;
+	}
+	
+	aside ul {
+		list-style: none;
 	}
 
-		#subnavigation #search .submit {
-			margin-left: 30px;
-			font-size: 12px;
+		aside #search .submit {
+			font-size: .8em;
 		}
 
-		#subnavigation #search_query_container input {
-			width: 100px;
+		aside #search_query_container input {
+			width: 100%;
 		}
 		
-		#subnavigation #search_query_container label {
+		aside #search_query_container label {
 			display: none;
 		}
+
+h2 {
+	text-align: left;
+}
+
+#content {
+	width: 580px;
+}
+
+#wrapper {
+	min-width: 760px;
+}
+
+.post.main h1 {
+	margin-bottom: .5em;
+}
+		
+.supertitle {
+	display: none;
+}

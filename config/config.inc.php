@@ -65,7 +65,7 @@
 	do_define("POST_IMAGE_MAX_FILE_SIZE", 1024 * 1024 * 5); 	// 5MB
 	
 	// Width of posts (used for automatic image resizing)
-	do_define("POST_WIDTH", 580);
+	do_define("POST_WIDTH", 484);
 	
 	// Posts Feed description
 	do_define("POSTS_FEED_DESCRIPTION", "Feed Description Here");
